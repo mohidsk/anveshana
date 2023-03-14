@@ -1,0 +1,1 @@
+var startupimage = 'assets/images/auth_images/startup.png';

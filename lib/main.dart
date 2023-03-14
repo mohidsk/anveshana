@@ -1,4 +1,6 @@
-import 'package:anveshana/screens/homepage.dart';
+import 'package:anveshana/screens/auth_screens/auth_start.dart';
+// import 'assets/images/img_paths.dart';
+// import 'package:anveshana/screens/homepage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,6 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -25,7 +28,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home:  Auth_Background(image: 'assets/images/auth_images/startup.png'),
     );
   }
 }
