@@ -1,3 +1,3 @@
 
 
-var Cblue = "#0075F2";
+var Cblue1 = "#1e4afa";
