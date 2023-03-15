@@ -1,7 +1,10 @@
-import 'package:anveshana/screens/auth_screens/auth_start.dart';
+import 'package:anveshana/screens/Auth/auth_start.dart';
 // import 'assets/images/img_paths.dart';
 // import 'package:anveshana/screens/homepage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +16,12 @@ class MyApp extends StatelessWidget {
       // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]
+    );
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -28,7 +36,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home:  Auth_Background(image: 'assets/images/auth_images/startup.png'),
+      home:  Auth_Start(),
     );
   }
 }
