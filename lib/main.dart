@@ -1,8 +1,15 @@
 import 'package:anveshana/screens/homepage.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'firebase_options.dart';
+
+Future main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +22,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+
       ),
+      debugShowCheckedModeBanner: false,
       home: const HomePage(),
     );
   }
