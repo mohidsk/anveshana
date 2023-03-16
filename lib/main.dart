@@ -1,10 +1,19 @@
 import 'package:anveshana/screens/auth_screens/auth_start.dart';
+import 'package:anveshana/screens/homepage.dart';
+import 'package:firebase_core/firebase_core.dart';
 // import 'assets/images/img_paths.dart';
 // import 'package:anveshana/screens/homepage.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'firebase_options.dart';
+
+Future main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options:DefaultFirebaseOptions.currentPlatform,
+  );
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -28,7 +37,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home:  Auth_Background(image: 'assets/images/auth_images/startup.png'),
+      home:  HomePage(),
     );
   }
 }
