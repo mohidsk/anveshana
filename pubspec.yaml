@@ -39,6 +39,8 @@ dependencies:
   firebase_core: ^2.7.1
   cloud_firestore: ^4.4.3
   get: ^4.6.5
+  google_fonts: ^4.0.3
+  flashy_tab_bar2: ^0.0.5
 
 dev_dependencies:
   flutter_test:
