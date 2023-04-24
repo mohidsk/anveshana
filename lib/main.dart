@@ -6,12 +6,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
+//the list was intilized to the homepro
 var homepro =[
   {
     'profileimg':'assets/images/auth_images/dev.png',
     'investername':'Devi Shenker',
-    'companyname' : 'Dev vishu Company',
+    'companyname' : 'Dev.inc',
     'companyinfo' : "You can easily find detailed company information and research on MarketResearch.com, where we provide thousands of company reports across every major industry around the globe. These company reports are produced by a variety of market research companies, bringing you important information in a quick-to-read downloadable PDF format.SHere are seven popular market research firms featured on our website that produce company reports. If you already have a specific company in mind that you’d like to research, you can type the company’s name into the search bar on our homepage to pull up immediate results."
   },
   {
@@ -27,25 +27,11 @@ var homepro =[
     'companyinfo' : "kjhdsihoihsroighjgoihjoihhhh hdsfghiohoih sdhpughos hsduihoisd sdhgf[uiohasd sdghtuiphsdf sdguhguisdfghhsdho "
   },
   {
-    'profileimg':'assets/images/auth_images/dev.png',
-    'investername':'Devi Shenker',
-    'companyname' : 'Dev vishu Company',
+    'profileimg':'assets/images/auth_images/bosda.png',
+    'investername':'Vivek',
+    'companyname' : 'Bosdaa.inc',
     'companyinfo' : "kjhdsihoihsroighjgoihjoihhhh hdsfghiohoih sdhpughos hsduihoisd sdhgf[uiohasd sdghtuiphsdf sdguhguisdfghhsdho "
   },
-  {
-    'profileimg':'assets/images/auth_images/dev.png',
-    'investername':'Devi Shenker',
-    'companyname' : 'Dev vishu Company',
-    'companyinfo' : "kjhdsihoihsroighjgoihjoihhhh hdsfghiohoih sdhpughos hsduihoisd sdhgf[uiohasd sdghtuiphsdf sdguhguisdfghhsdho "
-  },
-  {
-    'profileimg':'assets/images/auth_images/dev.png',
-    'investername':'Devi Shenker',
-    'companyname' : 'Dev vishu Company',
-    'companyinfo' : "kjhdsihoihsroighjgoihjoihhhh hdsfghiohoih sdhpughos hsduihoisd sdhgf[uiohasd sdghtuiphsdf sdguhguisdfghhsdho "
-  },
-
-
 ];
 void main() {
   runApp(MyApp());
