@@ -30,35 +30,6 @@ class _Home_StartUpState extends State<Home_StartUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        scrolledUnderElevation: 4,
-        elevation: 5,
-        backgroundColor: Colors.white,
-       title: Row(
-         mainAxisAlignment: MainAxisAlignment.start,
-         children: [
-           //profile iamge is initialized here
-           Padding(padding: EdgeInsets.only(right: 5),
-               child: Profile_Img(image: 'assets/images/auth_images/kappu.png' )
-           ),
-           //Search box is intialized in this code
-         Padding(
-           padding: const EdgeInsets.only(right:0),
-           child: Search_Box(navigation: null),
-         ),
-           Padding(padding: EdgeInsets.only(left: 3),
-           child: InkWell(
-             child: Icon(
-               Icons.notifications,
-               color: Colors.black,
-               size: 30,
-             ),
-           ),
-           )
-
-         ],
-       ),
-      ),
       body:Center(
         child: tabs[selectedindex],
         ),

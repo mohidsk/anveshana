@@ -1,16 +1,32 @@
+
+
 import 'package:anveshana/screens/Auth/login.dart';
+import 'package:anveshana/screens/components/Appbar_profile.dart';
+import 'package:anveshana/screens/homepage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gif/flutter_gif.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Sinup extends StatelessWidget {
+class Sinup extends StatefulWidget {
   const Sinup({Key? key}) : super(key: key);
 
   @override
+  State<Sinup> createState() => _SinupState();
+}
+
+class _SinupState extends State<Sinup> with TickerProviderStateMixin {
+  late FlutterGifController Profile_gif ,Email_gif ,Password_gif ;
+
+  @override
   Widget build(BuildContext context) {
-    var User_Name = TextEditingController();
-    var User_Pass = TextEditingController();
-    var User_Email = TextEditingController();
+    var StartUpUserName = TextEditingController();
+    var StartUpPassword = TextEditingController();
+    var StartUpEmail = TextEditingController();
+    Profile_gif = FlutterGifController(vsync: this);
+    Email_gif = FlutterGifController(vsync: this);
+    Password_gif = FlutterGifController(vsync: this);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SizedBox(
@@ -66,24 +82,42 @@ class Sinup extends StatelessWidget {
                 ),
                 ),
                Padding(
-                 padding: const EdgeInsets.only(top: 5,left: 30,right: 30),
+                 padding: const EdgeInsets.only(top: 10,left: 30,right: 30),
                  child: Column(
                    crossAxisAlignment: CrossAxisAlignment.start,
                    children: [
                      Row(
                        children: [
-                         ImageIcon(
-                             AssetImage('assets/images/auth_images/user.png')
+                         Container(
+                           height: 35,
+                     width: 35,
+                           child: GifImage(image: AssetImage('assets/images/auth_images/profile.gif'),
+                               controller: Profile_gif,),
                          ),
                          SizedBox(width: 10,),
                          SizedBox(
-                           height: 45,
+                           height: 50,
                              width: 250,
                            child: TextField(
-                             controller: User_Name,
+                             onTap: (){
+                               Email_gif.stop();
+                               Password_gif.stop();
+                               Profile_gif.repeat(
+                                 min: 0,
+                                   max: 25,
+                                reverse: true,
+                                period: Duration(seconds: 1)
+                               );
+                             },
+                             controller: StartUpUserName,
                              textAlign: TextAlign.justify,
+                             textAlignVertical: TextAlignVertical.top,
                              keyboardType: TextInputType.name,
+                             style: TextStyle(
+                               fontSize: 18,
+                             ),
                              decoration: InputDecoration(
+                               labelText: "Username",
                                border: OutlineInputBorder(
                                  borderRadius: BorderRadius.all(Radius.circular(100))
                                ),
@@ -105,17 +139,36 @@ class Sinup extends StatelessWidget {
                      SizedBox(height: 17,),
                      Row(
                        children: [
-                         ImageIcon(
-                             AssetImage('assets/images/auth_images/email.png')
+                         Container(
+                           height: 35,
+                           width: 35,
+                           child: GifImage(image: AssetImage('assets/images/auth_images/email.gif'),
+                             controller: Email_gif,),
                          ),
                          SizedBox(width: 10,),
                          SizedBox(
-                           height: 45,
+                           height: 50,
                            width: 250,
                            child: TextField(
-                             controller: User_Email,
+                             onTap: (){
+                               Profile_gif.stop();
+                               Password_gif.stop();
+                               Email_gif.repeat(
+                                 min: 0,
+                                 max: 25,
+                                 reverse: true,
+                                 period: Duration(seconds: 1)
+                               );
+                             },
+                             controller: StartUpEmail,
+                             textAlign: TextAlign.justify,
+                               textAlignVertical: TextAlignVertical.top,
                              keyboardType: TextInputType.emailAddress,
+                               style: TextStyle(
+                                 fontSize: 18,
+                               ),
                                decoration: InputDecoration(
+                                 labelText: "Email",
                                    border: OutlineInputBorder(
                                        borderRadius: BorderRadius.all(Radius.circular(100))
                                    ),
@@ -138,18 +191,37 @@ class Sinup extends StatelessWidget {
                      SizedBox(height: 17,),
                      Row(
                        children: [
-                        ImageIcon(
-                          AssetImage('assets/images/auth_images/lock.png')
-                        ),
+                         Container(
+                           height: 35,
+                           width: 35,
+                           child: GifImage(image: AssetImage('assets/images/auth_images/password.gif'),
+                             controller: Password_gif,),
+                         ),
                          SizedBox(width: 10,),
                          SizedBox(
-                           height: 45,
+                           height: 50,
                            width: 250,
                            child: TextField(
-                             controller: User_Pass,
+                             onTap: (){
+                               Profile_gif.stop();
+                               Email_gif.stop();
+                               Password_gif.repeat(
+                                 min: 0,
+                                 max: 25,
+                                 reverse: true,
+                                 period: Duration(seconds: 1)
+                               );
+                             },
+                             controller: StartUpPassword,
                              obscureText: true,
+                               textAlign: TextAlign.justify,
+                               textAlignVertical: TextAlignVertical.top,
                                obscuringCharacter: '.',
+                             style: TextStyle(
+                               fontSize: 18
+                             ),
                              decoration: InputDecoration(
+                               labelText: "Password",
                                  border: OutlineInputBorder(
                                      borderRadius: BorderRadius.all(Radius.circular(100))
                                  ),
@@ -179,9 +251,13 @@ class Sinup extends StatelessWidget {
                          ),
                          child: ElevatedButton(
                           onPressed: (){
-                            print(User_Name);
-                            print(User_Email);
-                            print(User_Pass);
+                            FirebaseAuth.instance.
+                            createUserWithEmailAndPassword(email: StartUpEmail.text, password: StartUpPassword.text).
+                            then((value) {
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Home_StartUp()));
+                            }).onError((error, stackTrace) {
+                              print('Error recived');
+                            });
                           },
                            child:Text('SignUp',style: TextStyle(color: Colors.white),),
                            style: ElevatedButton.styleFrom(
@@ -199,11 +275,11 @@ class Sinup extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 6 ,right: 100),
+                      padding: const EdgeInsets.only(top: 1 ,right: 100),
                       child: Image(image: AssetImage('assets/images/auth_images/Blob_left.png'),height: 150,),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 36,left: 44),
+                      padding: const EdgeInsets.only(top: 30,left: 44),
                       child: Image(image: AssetImage('assets/images/auth_images/Blob_right.png'),height: 120,),
                     ),
                   ],

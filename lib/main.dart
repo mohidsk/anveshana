@@ -2,6 +2,7 @@ import 'package:anveshana/screens/Auth/auth_start.dart';
 import 'package:anveshana/screens/Auth/signup.dart';
 import 'package:anveshana/screens/HomePageScreens/HomePg.dart';
 import 'package:anveshana/screens/homepage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,35 +13,92 @@ var homepro =[
     'profileimg':'assets/images/auth_images/dev.png',
     'investername':'Devi Shenker',
     'companyname' : 'Dev.inc',
-    'companyinfo' : "You can easily find detailed company information and research on MarketResearch.com, where we provide thousands of company reports across every major industry around the globe. These company reports are produced by a variety of market research companies, bringing you important information in a quick-to-read downloadable PDF format.SHere are seven popular market research firms featured on our website that produce company reports. If you already have a specific company in mind that you’d like to research, you can type the company’s name into the search bar on our homepage to pull up immediate results."
+    'companyinfo' : "You can easily find detailed company information and research "
+        "on MarketResearch.com, where we provide thousands of company reports across"
+        " every major industry around the globe. These company reports are produced "
+        "by a variety of market research companies, bringing you important information "
+        "in a quick-to-read downloadable PDF format.SHere are seven popular"
+        " market research firms featured on our website that produce company reports."
+        " If you already have a specific company in mind that you’d like to research, "
+        "you can type the company’s name into the search bar on our homepage to pull up "
+        "immediate results."
   },
   {
     'profileimg':'assets/images/auth_images/hems.jpg',
     'investername':'Hemanth',
     'companyname' : 'Him.inc',
-    'companyinfo' : "kjhdsihoihsroighjgoihjoihhhh hdsfghiohoih sdhpughos hsduihoisd sdhgf[uiohasd sdghtuiphsdf sdguhguisdfghhsdho "
+    'companyinfo' : "You can easily find detailed company information and research "
+        "on MarketResearch.com, where we provide thousands of company reports across"
+        " every major industry around the globe. These company reports are produced "
+        "by a variety of market research companies, bringing you important information "
+        "in a quick-to-read downloadable PDF format.SHere are seven popular"
+        " market research firms featured on our website that produce company reports."
+        " If you already have a specific company in mind that you’d like to research, "
+        "you can type the company’s name into the search bar on our homepage to pull up "
+        "immediate results."
   },
   {
     'profileimg':'assets/images/auth_images/mohid.png',
     'investername':'mr_life_racer__',
     'companyname' : 'sm.inc',
-    'companyinfo' : "kjhdsihoihsroighjgoihjoihhhh hdsfghiohoih sdhpughos hsduihoisd sdhgf[uiohasd sdghtuiphsdf sdguhguisdfghhsdho "
+    'companyinfo' : "You can easily find detailed company information and research "
+        "on MarketResearch.com, where we provide thousands of company reports across"
+        " every major industry around the globe. These company reports are produced "
+        "by a variety of market research companies, bringing you important information "
+        "in a quick-to-read downloadable PDF format.SHere are seven popular"
+        " market research firms featured on our website that produce company reports."
+        " If you already have a specific company in mind that you’d like to research, "
+        "you can type the company’s name into the search bar on our homepage to pull up "
+        "immediate results."
   },
   {
     'profileimg':'assets/images/auth_images/bosda.png',
     'investername':'Vivek',
     'companyname' : 'Bosdaa.inc',
-    'companyinfo' : "kjhdsihoihsroighjgoihjoihhhh hdsfghiohoih sdhpughos hsduihoisd sdhgf[uiohasd sdghtuiphsdf sdguhguisdfghhsdho "
+    'companyinfo' : "You can easily find detailed company information and research "
+        "on MarketResearch.com, where we provide thousands of company reports across"
+        " every major industry around the globe. These company reports are produced "
+        "by a variety of market research companies, bringing you important information "
+        "in a quick-to-read downloadable PDF format.SHere are seven popular"
+        " market research firms featured on our website that produce company reports."
+        " If you already have a specific company in mind that you’d like to research, "
+        "you can type the company’s name into the search bar on our homepage to pull up "
+        "immediate results."
   },
 ];
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+await Firebase.initializeApp();
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
    MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
     //purna
-      // This widget is the root of your application.
+   var auth = FirebaseAuth.instance;
+   var islogin = false;
+checkingIsLogin()async{
+  auth.authStateChanges().listen((User? user) {
+  if(user!=null && mounted){
+    setState(() {
+      islogin = true;
+    });
+  }
+  });
+}
+@override
+  void initState() {
+  // TODO: implement initState
+  checkingIsLogin();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -62,7 +120,7 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
       ),
-      home: Home_StartUp(),
+      home: islogin? Home_StartUp():Auth_Start(),
     );
   }
 }

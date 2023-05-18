@@ -1,6 +1,12 @@
+import 'package:anveshana/screens/Auth/signup.dart';
+import 'package:anveshana/screens/homepage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gif/flutter_gif.dart';
 import 'auth_start.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:anveshana/controllers/auth_controller.dart';
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
 
@@ -8,18 +14,14 @@ class Login extends StatefulWidget {
   State<Login> createState() => _LoginState();
 }
 
-class _LoginState extends State<Login> {
-  var LoginName = TextEditingController();
-  var LoginEmail = TextEditingController();
-  var LoginPass = TextEditingController();
-  var InLoginName = TextEditingController();
-  var InLoginEmail = TextEditingController();
-  var InLoginPass = TextEditingController();
-  var StLoginName = TextEditingController();
-  var StLoginEmail = TextEditingController();
-  var StLoginPass = TextEditingController();
+class _LoginState extends State<Login> with TickerProviderStateMixin{
+
   @override
   Widget build(BuildContext context) {
+    var StartUpEmail = TextEditingController();
+    var StartUpPassword = TextEditingController();
+    late FlutterGifController Email_gif = FlutterGifController(vsync: this);
+    late FlutterGifController Password_gif = FlutterGifController(vsync: this);
     return Scaffold(
           backgroundColor: Colors.white,
           body: SizedBox(
@@ -42,16 +44,23 @@ class _LoginState extends State<Login> {
                       ),
 
                     ),
-                    Padding(padding: EdgeInsets.only(top: 5,left: 120,right: 120),
+                    Padding(padding: EdgeInsets.only(top: 5,left: 90),
                       child: Row(
                         children: [
                           RichText(
+                            textAlign: TextAlign.center,
                             text: TextSpan(
                                 children:[
-                                  TextSpan(text: 'Sign in to continue',style: TextStyle(
-                                      color: Colors.black
+                                  TextSpan(text: "Don't have an Account,",style: TextStyle(
+                                      color: Colors.black,
+                                    fontSize: 16
                                   ),
                                   ),
+                                  TextSpan(text:"SignUp",
+                                  style: TextStyle(color: Colors.blue),
+                                  recognizer: TapGestureRecognizer()..onTap = (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Sinup()));
+                                  })
                                 ]
 
                             ),
@@ -60,56 +69,42 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 40,left: 30,right: 30),
+                      padding: const EdgeInsets.only(top: 40,left: 25,right: 30,bottom: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            children: [
-                              ImageIcon(
-                                  AssetImage('assets/images/auth_images/user.png')
-                              ),
-                              SizedBox(width: 10,),
-                              SizedBox(
-                                height: 45,
-                                width: 250,
-                                child: TextField(
-                                  controller: LoginName,
-                                  textAlign: TextAlign.justify,
-                                  keyboardType: TextInputType.name,
-                                  decoration: InputDecoration(
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(Radius.circular(100))
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(Radius.circular(100)),
-                                          borderSide: BorderSide(color: Colors.blue.shade300)
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(100),
-                                          borderSide: BorderSide(color: Colors.black)
-                                      )
-
-                                  ),
-
-                                ),
-                              )
-                            ],
-                          ),
                           SizedBox(height: 17,),
                           Row(
                             children: [
-                              ImageIcon(
-                                  AssetImage('assets/images/auth_images/email.png')
+                              Container(
+                                height: 35,
+                                width: 35,
+                                child: GifImage(image: AssetImage('assets/images/auth_images/email.gif'),
+                                  controller: Email_gif,),
                               ),
                               SizedBox(width: 10,),
                               SizedBox(
-                                height: 45,
+                                height: 50,
                                 width: 250,
                                 child: TextField(
-                                  controller: LoginEmail,
+                                  onTap: (){
+                                    Password_gif.stop();
+                                    Email_gif.repeat(
+                                      min: 0,
+                                      max: 25,
+                                      reverse: true,
+                                      period: Duration(seconds: 1),
+                                    );
+                                  },
+                                  controller: StartUpEmail,
                                   keyboardType: TextInputType.emailAddress,
+                                  textAlign: TextAlign.justify,
+                                    textAlignVertical: TextAlignVertical.top,
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
                                   decoration: InputDecoration(
+                                      labelText: "Email",
                                       border: OutlineInputBorder(
                                           borderRadius: BorderRadius.all(Radius.circular(100))
                                       ),
@@ -129,38 +124,63 @@ class _LoginState extends State<Login> {
 
                             ],
                           ),
-                          SizedBox(height: 17,),
-                          Row(
-                            children: [
-                              ImageIcon(
-                                  AssetImage('assets/images/auth_images/lock.png')
-                              ),
-                              SizedBox(width: 10,),
-                              SizedBox(
-                                height: 45,
-                                width: 250,
-                                child: TextField(
-                                  controller: LoginPass,
-                                  obscureText: true,
-                                  obscuringCharacter: '.',
-                                  decoration: InputDecoration(
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(Radius.circular(100))
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(Radius.circular(100)),
-                                          borderSide: BorderSide(color: Colors.blue.shade300)
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(100),
-                                          borderSide: BorderSide(color: Colors.black)
-                                      )
-
-                                  ),
-
+                          Padding(
+                            padding: const EdgeInsets.only(left: 2,right: 2,top: 14),
+                            child: Row(
+                              children: [
+                                Container(
+                                  height: 35,
+                                  width: 35,
+                                  child: GifImage(image: AssetImage('assets/images/auth_images/password.gif'),
+                                    controller: Password_gif,),
                                 ),
-                              )
-                            ],
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    height: 50,
+                                    width: 250,
+                                    child: TextField(
+                                      onTap: (){
+                                        Email_gif.stop();
+                                        Password_gif.repeat(
+                                          min: 0,
+                                          max: 25,
+                                          reverse: true,
+                                          period: Duration(seconds: 1)
+                                        );
+                                      },
+                                      controller: StartUpPassword,
+                                      textAlign: TextAlign.start,
+                                      textAlignVertical: TextAlignVertical.top,
+                                      obscureText: true,
+                                      obscuringCharacter: '.',
+                                      textDirection: TextDirection.ltr,
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w100
+                                      ),
+                                      cursorColor: Colors.blue,
+                                      decoration: InputDecoration(
+                                        labelText: "Password",
+                                          border: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(Radius.circular(100))
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(Radius.circular(100)),
+                                              borderSide: BorderSide(color: Colors.blue.shade300)
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.circular(100),
+                                              borderSide: BorderSide(color: Colors.black)
+                                          )
+
+                                      ),
+
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 20,left: 95,right: 95),
@@ -173,8 +193,15 @@ class _LoginState extends State<Login> {
                               ),
                               child: ElevatedButton(
                                   onPressed: (){
+                                    FirebaseAuth.instance
+                                        .signInWithEmailAndPassword(
+                                        email: StartUpEmail.text, password: StartUpPassword.text).then((value) {
+                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Home_StartUp()));
+                                    }).onError((error, stackTrace) {
+                                      print("Error occoured");
+                                    });
                                     },
-                                  child:Text('SignUp',style: TextStyle(color: Colors.white),),
+                                  child:Text('LogIn',style: TextStyle(color: Colors.white),),
                                   style: ElevatedButton.styleFrom(
                                       shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(100)
@@ -206,7 +233,6 @@ class _LoginState extends State<Login> {
           ),
         );
   }
-  void invORSt(){
-  }
+
   }
 

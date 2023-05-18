@@ -44,39 +44,40 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCpOTPCJ5LxF_H5oqKlqbGrSGGItjNfp5c',
-    appId: '1:367980199883:web:e89f8aa5412181e717804e',
-    messagingSenderId: '367980199883',
-    projectId: 'anveshana-121f4',
-    authDomain: 'anveshana-121f4.firebaseapp.com',
-    storageBucket: 'anveshana-121f4.appspot.com',
+    apiKey: 'AIzaSyAOViw6kLc0xS4n1eHRjL7Tt7bkUL5UZJo',
+    appId: '1:151655869902:web:8704a0a90e8352b671cf9f',
+    messagingSenderId: '151655869902',
+    projectId: 'anveshana-6e3ca',
+    authDomain: 'anveshana-6e3ca.firebaseapp.com',
+    storageBucket: 'anveshana-6e3ca.appspot.com',
+    measurementId: 'G-2SBXQXZDQZ',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA5aH9b8ggZaB7kRFUOVCXOYyIxR6AooOo',
-    appId: '1:367980199883:android:a5da19200ca534fe17804e',
-    messagingSenderId: '367980199883',
-    projectId: 'anveshana-121f4',
-    storageBucket: 'anveshana-121f4.appspot.com',
+    apiKey: 'AIzaSyB6_wrZe8RWh-2feWVcG-rCoMuRbGkjoDk',
+    appId: '1:151655869902:android:81cc768a9c0a94ee71cf9f',
+    messagingSenderId: '151655869902',
+    projectId: 'anveshana-6e3ca',
+    storageBucket: 'anveshana-6e3ca.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyD1_04hv3jcnOgfgIvuQxH_W8CYA8KNzyE',
-    appId: '1:367980199883:ios:2bb42a5342c7b9fb17804e',
-    messagingSenderId: '367980199883',
-    projectId: 'anveshana-121f4',
-    storageBucket: 'anveshana-121f4.appspot.com',
-    iosClientId: '367980199883-ftd3n7dv9e173c6njdgvifa34907mris.apps.googleusercontent.com',
+    apiKey: 'AIzaSyAC9EC6jferajIn5w1FF9u5TTAgS7xua1g',
+    appId: '1:151655869902:ios:de222739a8a12bd171cf9f',
+    messagingSenderId: '151655869902',
+    projectId: 'anveshana-6e3ca',
+    storageBucket: 'anveshana-6e3ca.appspot.com',
+    iosClientId: '151655869902-ku5e9iplgut24himqqo52fjf90840gnl.apps.googleusercontent.com',
     iosBundleId: 'com.example.anveshana',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyD1_04hv3jcnOgfgIvuQxH_W8CYA8KNzyE',
-    appId: '1:367980199883:ios:2bb42a5342c7b9fb17804e',
-    messagingSenderId: '367980199883',
-    projectId: 'anveshana-121f4',
-    storageBucket: 'anveshana-121f4.appspot.com',
-    iosClientId: '367980199883-ftd3n7dv9e173c6njdgvifa34907mris.apps.googleusercontent.com',
+    apiKey: 'AIzaSyAC9EC6jferajIn5w1FF9u5TTAgS7xua1g',
+    appId: '1:151655869902:ios:de222739a8a12bd171cf9f',
+    messagingSenderId: '151655869902',
+    projectId: 'anveshana-6e3ca',
+    storageBucket: 'anveshana-6e3ca.appspot.com',
+    iosClientId: '151655869902-ku5e9iplgut24himqqo52fjf90840gnl.apps.googleusercontent.com',
     iosBundleId: 'com.example.anveshana',
   );
 }
